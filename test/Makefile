@@ -5,7 +5,8 @@
 SIM ?= icarus
 TOPLEVEL_LANG ?= verilog
 SRC_DIR = $(PWD)/../src
-PROJECT_SOURCES = morse_top.v morse_seven_seg.v
+PROJECT_SOURCES += morse_top.v
+PROJECT_SOURCES += morse_seven_seg.v
 
 ifneq ($(GATES),yes)
 
