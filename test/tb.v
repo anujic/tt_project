@@ -14,8 +14,8 @@ module tb ();
   end
 
   // Wire up the inputs and outputs:
-  reg clk;
-  reg rst_n;
+  reg clk_i;     
+  reg rst_ni;     
   reg ena;
   reg [7:0] ui_in;
   reg [7:0] uio_in;
@@ -31,8 +31,8 @@ module tb ();
       .uio_out(uio_out),  // IOs: Output path
       .uio_oe (uio_oe),   // IOs: Enable path (active high: 0=input, 1=output)
       .ena    (ena),      // enable - goes high when design is selected
-      .clk    (clk),      // clock
-      .rst_n  (rst_n)     // not reset
+      .clk_i  (clk_i),    // clock 
+      .rst_ni (rst_ni)    // reset_n
   );
 
 endmodule

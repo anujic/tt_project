@@ -1,11 +1,11 @@
 # Tiny Tapeout project information
 project:
-  title:        "Tiny Tapeout Project"      # Project title
+  title:        "Morse Code Trainer"      # Project title
   author:       "Angelo Nujic"      # Your name
   discord:      ""      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
-  description:  "initial setup"      # One line description of what your project does
+  description:  "Interactive Morse Code learning game with 7-segment display"      # One line description of what your project does
   language:     "Verilog" # other examples include SystemVerilog, Amaranth, VHDL, etc
-  clock_hz:     0       # Clock frequency in Hz (or 0 if not applicable)
+  clock_hz:     10000000       # Clock frequency in Hz (10 MHz for timing)
 
   # How many tiles your design occupies? A single tile is about 167x108 uM.
   tiles: "1x1"          # Valid values: 1x1, 1x2, 2x2, 3x2, 4x2, 6x2 or 8x2
@@ -23,9 +23,9 @@ project:
 # This section is for the datasheet/website. Use descriptive names (e.g., RX, TX, MOSI, SCL, SEG_A, etc.).
 pinout:
   # Inputs
-  ui[0]: ""
-  ui[1]: ""
-  ui[2]: ""
+  ui[0]: "Morse Key Input"
+  ui[1]: "Next/Advance Button" 
+  ui[2]: "Reset Button"
   ui[3]: ""
   ui[4]: ""
   ui[5]: ""
@@ -33,14 +33,14 @@ pinout:
   ui[7]: ""
 
   # Outputs
-  uo[0]: ""
-  uo[1]: ""
-  uo[2]: ""
-  uo[3]: ""
-  uo[4]: ""
-  uo[5]: ""
-  uo[6]: ""
-  uo[7]: ""
+  uo[0]: "7-Seg A"
+  uo[1]: "7-Seg B"
+  uo[2]: "7-Seg C"
+  uo[3]: "7-Seg D"
+  uo[4]: "7-Seg E"
+  uo[5]: "7-Seg F"
+  uo[6]: "7-Seg G"
+  uo[7]: "Status LED"
 
   # Bidirectional pins
   uio[0]: ""
