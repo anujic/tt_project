@@ -12,8 +12,8 @@ module tt_um_anujic (
     output wire [7:0] uio_out,  // IOs: Output path
     output wire [7:0] uio_oe,   // IOs: Enable path (active high: 0=input, 1=output)
     input  wire       ena,      // always 1 when the design is powered, so you can ignore it
-    input  wire       clk_i,      // clock
-    input  wire       rst_ni     // reset_n - low to reset
+    input  wire       clk,      // clock
+    input  wire       rst_n     // reset_n - low to reset
 );
 
   // Morse timing parameters (for 100Hz clock)
@@ -55,8 +55,8 @@ module tt_um_anujic (
 
   // 7 segment display with randomly selected letter
   morse_seven_seg seven_seg_i (
-    .clk_i    (clk_i),
-    .rst_ni   (rst_ni),
+    .clk    (clk),
+    .rst_n   (rst_n),
     .start_i  (start),
     .seg_o    (uo_out[6:0]),
     .letter_o (letter),
@@ -185,8 +185,8 @@ always @(*) begin
 end
 
 // Sequential logic update
-always @(posedge clk_i) begin
-  if (!rst_ni) begin
+always @(posedge clk) begin
+  if (!rst_n) begin
     input_morse_q <= '0;
     timer_q <= '0;
     prev_morse_q <= 1'b0;

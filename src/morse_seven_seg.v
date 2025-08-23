@@ -6,8 +6,8 @@
 `default_nettype none
 
 module morse_seven_seg(
-  input wire clk_i,
-  input wire rst_ni,
+  input wire clk,
+  input wire rst_n,
   input wire start_i,
   output reg [6:0] seg_o,
   output reg [4:0] letter_o,
@@ -56,8 +56,8 @@ always @(*) begin
   
 end
 
-always @(posedge clk_i) begin
-  if (!rst_ni) begin
+always @(posedge clk) begin
+  if (!rst_n) begin
     counter_q <= 5'b00000;
     ready_q <= 1'b0;
     seg_q     <= 'b0;
