@@ -31,7 +31,7 @@ module tt_um_anujic (
   wire start;
   wire morse;
   wire next;
-  wire correct_res;
+  reg correct_res;
   reg [3:0] input_morse_q, input_morse_d;
   reg [6:0] correct_morse;
   reg [3:0] code;
