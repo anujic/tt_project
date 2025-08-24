@@ -16,9 +16,24 @@ module morse_seven_seg(
 reg [4:0] counter_q, counter_d;
 reg ready_q, ready_d;
 reg [6:0] seg_d, seg_q;
-assign counter_d = ~ready_q ? counter_q + 1 : counter_q;
-assign ready_d = start_i;
-assign letter_o = ready_q ? counter_q : 'b1;
+
+// Fixed logic - counter should only increment when start is first pressed
+// and should be held while ready is asserted
+always @(*) begin
+  counter_d = (counter_q < 25) ? counter_q + 1 : 5'd0;;
+  ready_d = ready_q;
+  
+  if (start_i) begin
+    // Start button pressed for first time - advance to next letter and become ready
+    counter_d = counter_q; // Wrap around after Z
+    ready_d = 1'b1;
+  end else if (!start_i) begin
+    // Start button released - become not ready
+    ready_d = 1'b0;
+  end
+end
+
+assign letter_o = counter_q;
 assign seg_o = seg_q;
 assign ready_o = ready_q;
 
@@ -62,11 +77,11 @@ always @(posedge clk) begin
   if (!rst_n) begin
     counter_q <= 5'b00000;
     ready_q <= 1'b0;
-    seg_q     <= 'b0;
+    seg_q <= 7'b0000000;  // All segments off initially
   end else begin
     counter_q <= counter_d;
     ready_q <= ready_d;
-    seg_q     <=     seg_d;
+    seg_q <= seg_d;
   end
 end
   

@@ -107,7 +107,7 @@ always @(*) begin
   bit_count_d = bit_count_q;
   input_valid = 1'b0;
   correct_res = 1'b0;
-  state_d = state_q;  // Added missing default assignment
+  state_d = state_q;  
   
   case (state_q)
     2'b01, IDLE: begin
@@ -139,7 +139,7 @@ always @(*) begin
             bit_count_d = bit_count_q + 1'b1;
           end else if (timer_q >= DOT_TIME) begin
             // It's a dot (0)
-            input_morse_d = (input_morse_q << 1);  // Fixed: don't OR with 1 for dot
+            input_morse_d = (input_morse_q << 1);  
             bit_count_d = bit_count_q + 1'b1;
           end
           timer_d = 6'b0;
@@ -151,9 +151,7 @@ always @(*) begin
           end else begin // timeout
             state_d = IDLE;
           end
-        end
-        // If morse is low (gap), increment timer to detect character completion
-        else begin
+        end else begin // If morse is low (gap), increment timer to detect character completion
           if (timer_q < 6'b111111) timer_d = timer_q + 1'b1;
           // Character complete if gap is long enough
           if (timer_q >= CHAR_TIME) begin
