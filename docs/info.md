@@ -2,7 +2,7 @@
 
 An interactive educational game that teaches Morse code through hands-on practice with a 7-segment display and tactile input.
 
-## How it works
+# How it works
 
 This Morse Code trainer presents letters on a 7-segment display and challenges users to input the correct Morse code pattern using a telegraph key. The system provides immediate feedback and progresses through a carefully selected set of characters.
 
