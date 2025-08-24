@@ -20,6 +20,7 @@ assign counter_d = ~ready_q ? counter_q + 1 : counter_q;
 assign ready_d = start_i;
 assign letter_o = ready_q ? counter_q : 'b1;
 assign seg_o = seg_q;
+assign ready_o = ready_q;
 
 always @(*) begin
   seg_d = 'b0; // All segments off by default

@@ -19,27 +19,27 @@ module tt_um_anujic (
   // Morse timing parameters (for 100Hz clock)
   localparam DOT_TIME     = 6'd20;  // ~200ms for dot
   localparam DASH_TIME    = 6'd60;  // ~600ms for dash  
-  localparam GAP_TIME     = 6'd10;  // ~100ms gap between dots/dashes
+  //localparam GAP_TIME     = 6'd10;  // ~100ms gap between dots/dashes
   localparam CHAR_TIME    = 6'd40;  // ~400ms to complete character input
 
   // FSM States
   localparam IDLE         = 2'b00;
-  localparam DISP         = 2'b01;
+  //localparam DISP         = 2'b01;
   localparam PROC_INPUT   = 2'b10;
   localparam RES          = 2'b11;
 
   wire start;
   wire morse;
-  wire next;
+  //wire next;
   reg correct_res;
   reg [3:0] input_morse_q, input_morse_d;
   reg [6:0] correct_morse;
-  reg [3:0] code;
-  reg [2:0] len;  // Changed from [1:0] to [2:0] to match usage
+  //reg [3:0] code;
+  //reg [2:0] len;  // Changed from [1:0] to [2:0] to match usage
   reg [4:0] letter;
   reg display_ready;
-  reg [1:0] count_len_q, count_len_d;
-  reg [5:0] count_time_q, count_time_d;
+  //reg [1:0] count_len_q, count_len_d;
+  //reg [5:0] count_time_q, count_time_d;
   reg [1:0] state_q, state_d;
   // Additional signals for Morse input detection
   reg [5:0] timer_q, timer_d;          // Timer for measuring durations
@@ -64,36 +64,36 @@ module tt_um_anujic (
   );
 
   always @(*) begin
-    correct_morse = 6'h3F;
+    correct_morse = 7'h7F;
     if(start && display_ready) begin
       case (letter)
-        7'd0: correct_morse = {3'd2, 4'b10}; // A: .-
-        7'd1: correct_morse = {3'd4, 4'b1000}; // B: -...
-        7'd2: correct_morse = {3'd4, 4'b1010}; // C: -.-.
-        7'd3: correct_morse = {3'd3, 4'b100}; // D: -..
-        7'd4: correct_morse = {3'd1, 4'b0}; // E: .
-        7'd5: correct_morse = {3'd4, 4'b0010}; // F: ..-.
-        7'd6: correct_morse = {3'd3, 4'b110}; // G: --.
-        7'd7: correct_morse = {3'd4, 4'b0000}; // H: ....
-        7'd8: correct_morse = {3'd2, 4'b00}; // I: ..
-        7'd9: correct_morse = {3'd4, 4'b0111}; // J: .---
-        7'd10: correct_morse = {3'd3, 4'b101}; // K: -.-
-        7'd11: correct_morse = {3'd4, 4'b0100}; // L: .-..
-        7'd12: correct_morse = {3'd2, 4'b11}; // M: --
-        7'd13: correct_morse = {3'd2, 4'b10}; // N: -.
-        7'd14: correct_morse = {3'd3, 4'b111}; // O: ---
-        7'd15: correct_morse = {3'd4, 4'b0110}; // P: .--.
-        7'd16: correct_morse = {3'd4, 4'b1101}; // Q: --.-
-        7'd17: correct_morse = {3'd3, 4'b010}; // R: .-.
-        7'd18: correct_morse = {3'd3, 4'b000}; // S: ...
-        7'd19: correct_morse = {3'd1, 4'b1}; // T: -
-        7'd20: correct_morse = {3'd3, 4'b001}; // U: ..-
-        7'd21: correct_morse = {3'd4, 4'b0001}; // V: ...-
-        7'd22: correct_morse = {3'd3, 4'b011}; // W: .--
-        7'd23: correct_morse = {3'd4, 4'b1001}; // X: -..-
-        7'd24: correct_morse = {3'd4, 4'b1011}; // Y: -.--
-        7'd25: correct_morse = {3'd4, 4'b1100}; // Z: --..
-        default: correct_morse = 6'h3F; // Default to avoid latches
+        6'd0: correct_morse = {3'd2, 4'b10}; // A: .-
+        6'd1: correct_morse = {3'd4, 4'b1000}; // B: -...
+        6'd2: correct_morse = {3'd4, 4'b1010}; // C: -.-.
+        6'd3: correct_morse = {3'd3, 4'b100}; // D: -..
+        6'd4: correct_morse = {3'd1, 4'b0}; // E: .
+        6'd5: correct_morse = {3'd4, 4'b0010}; // F: ..-.
+        6'd6: correct_morse = {3'd3, 4'b110}; // G: --.
+        6'd7: correct_morse = {3'd4, 4'b0000}; // H: ....
+        6'd8: correct_morse = {3'd2, 4'b00}; // I: ..
+        6'd9: correct_morse = {3'd4, 4'b0111}; // J: .---
+        6'd10: correct_morse = {3'd3, 4'b101}; // K: -.-
+        6'd11: correct_morse = {3'd4, 4'b0100}; // L: .-..
+        6'd12: correct_morse = {3'd2, 4'b11}; // M: --
+        6'd13: correct_morse = {3'd2, 4'b10}; // N: -.
+        6'd14: correct_morse = {3'd3, 4'b111}; // O: ---
+        6'd15: correct_morse = {3'd4, 4'b0110}; // P: .--.
+        6'd16: correct_morse = {3'd4, 4'b1101}; // Q: --.-
+        6'd17: correct_morse = {3'd3, 4'b010}; // R: .-.
+        6'd18: correct_morse = {3'd3, 4'b000}; // S: ...
+        6'd19: correct_morse = {3'd1, 4'b1}; // T: -
+        6'd20: correct_morse = {3'd3, 4'b001}; // U: ..-
+        6'd21: correct_morse = {3'd4, 4'b0001}; // V: ...-
+        6'd22: correct_morse = {3'd3, 4'b011}; // W: .--
+        6'd23: correct_morse = {3'd4, 4'b1001}; // X: -..-
+        6'd24: correct_morse = {3'd4, 4'b1011}; // Y: -.--
+        6'd25: correct_morse = {3'd4, 4'b1100}; // Z: --..
+        default: correct_morse = 7'h7F; // Default to avoid latches
       endcase
     end
   end
@@ -110,7 +110,7 @@ always @(*) begin
   state_d = state_q;  // Added missing default assignment
   
   case (state_q)
-    IDLE: begin
+    2'b01, IDLE: begin
       // Reset input related signals when going to IDLE
       input_morse_d = 4'b0;
       timer_d = 6'b0;
